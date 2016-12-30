@@ -2,6 +2,15 @@
 ## A package to parse Wikimedia dump files and create graphs in Neo4j
 
 
+### Instructions
+
+```
+# run the tests
+/wiki2graph $ python setup.py test
+# install the package
+/wiki2graph $ pip install -e .
+```
+
 ### References
 
 - [neo4j website](https://neo4j.com/)

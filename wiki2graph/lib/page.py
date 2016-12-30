@@ -1,4 +1,6 @@
 import re
+from utilities import flatten_all
+import pdb
 
 class Page():
     def __init__(self, text):
@@ -24,3 +26,14 @@ class Page():
 
     def lint_link(self, link):
         return link.split('|')[0].strip()
+
+    @staticmethod
+    def merge_links_and_title(p):
+        l = p.links
+        l.append(p.title)
+        return l
+
+    @staticmethod
+    def unique_from_list(page_list):
+        lst = map(lambda p: Page.merge_links_and_title(p), page_list)
+        return list(set(flatten_all(lst)))
