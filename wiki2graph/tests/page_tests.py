@@ -10,7 +10,9 @@ class PageTest(unittest.TestCase):
         456
         [[link1]]
         789
-        [[link2]]        
+        [[  link2  ]]        
+        1515
+        [[link to: be excluded]]
         """
         self.page = Page(text)
 

@@ -3,7 +3,6 @@
 
 from wiki2graph import *
 import pdb
-import os
 
 file_path = 'data/chunk-1.xml.bz2'
 
