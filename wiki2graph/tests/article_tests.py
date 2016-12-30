@@ -28,6 +28,11 @@ class ArticleTest(unittest.TestCase):
         actual = Article.unique_from_list(lst)
         self.assertEqual(actual, ['abc','link1', 'link2'])
 
+    def test_relations_from_list(self):
+        lst = [self.article, self.article]
+        actual = Article.relations_from_list(lst)
+        self.assertEqual(actual, [('abc', 'link2'), ('abc', 'link1')])
+
 
 if __name__ == '__main__':
     unittest.main()

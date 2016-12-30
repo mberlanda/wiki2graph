@@ -27,6 +27,11 @@ class Article():
         return link.split('|')[0].strip()
 
     @staticmethod
+    def relations_from_list(article_list):
+        lst = map(lambda p: Article.tuple_links_and_title(p), article_list)
+        return Article.flatten_unique(lst)
+
+    @staticmethod
     def unique_from_list(article_list):
         lst = map(lambda p: Article.merge_links_and_title(p), article_list)
         return Article.flatten_unique(lst)
@@ -40,3 +45,14 @@ class Article():
         l = p.links
         l.append(p.title)
         return l
+
+    @staticmethod
+    def tuple_links_and_title(p):
+        r = []
+        t = p.title
+        for l in p.links:
+            if l > t:
+                r.append((t, l))
+            else:
+                r.append((l, t))
+        return r

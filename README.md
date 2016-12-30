@@ -9,6 +9,10 @@
 /wiki2graph $ python setup.py test
 # install the package
 /wiki2graph $ pip install -e .
+# run the script
+/wiki2graph/wiki2graph $ python main.py
+
+
 ```
 
 ### References
