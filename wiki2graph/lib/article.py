@@ -24,12 +24,12 @@ class Article():
         return map(lambda l: self.lint_link(l), filtered)
 
     def lint_link(self, link):
-        return link.split('|')[0].strip()
+        return link.split('|')[0].split('#')[0].strip()
 
     @staticmethod
     def relations_from_list(article_list):
         lst = map(lambda p: Article.tuple_links_and_title(p), article_list)
-        return Article.flatten_unique(lst)
+        return map(lambda a: { 'source': a[0], 'target': a[1] } ,Article.flatten_unique(lst))
 
     @staticmethod
     def unique_from_list(article_list):

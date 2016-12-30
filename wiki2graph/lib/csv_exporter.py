@@ -10,19 +10,31 @@ class CsvExporter():
         pass
 
     def unique_articles(self, article_list):
-        dir_name = check_dir('tmp')
-        file_name = 'unique_articles_{0}.csv'.format(int(time()))
-        file_path = path.join(dir_name, file_name)
+        file_path = self.generate_filepath('unique_articles')
 
         with open(file_path, 'wb') as f:
-            writer = csv.writer(f)
-            writer.writerow(['article'])
-            [ writer.writerow([a]) for a in article_list]
+            w = CsvExporter.default_writer(f)
+            w.writerow(['article'])
+            [ w.writerow([a]) for a in article_list]
 
         return file_path
 
-    def article_links(self, article_link_list):
-        dir_name = check_dir('tmp')
-        file_name = 'article_links_{0}.csv'.format(int(time()))
-        file_path = path.join(dir_name, file_name)
+    def article_relations(self, article_relations_dict):
+        file_path = self.generate_filepath('article_relations')
+        
+        with open(file_path, 'wb') as f:
+            keys = ['source', 'target']
+            w = CsvExporter.default_writer(f)
+            w.writerow(keys)
+            [ w.writerow([d[k] for k in keys]) for d in article_relations_dict]
 
+        return file_path
+
+    def generate_filepath(self, type, folder='tmp'):
+        dir_name = check_dir(folder)
+        file_name = '{0}_{1}.csv'.format(type, int(time()))
+        return path.join(dir_name, file_name)
+
+    @staticmethod
+    def default_writer(file):
+        return csv.writer(file, delimiter=';', quoting=csv.QUOTE_NONNUMERIC)
