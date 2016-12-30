@@ -1,7 +1,7 @@
-from wiki2graph import Page
+from wiki2graph import Article
 import unittest
 
-class PageTest(unittest.TestCase):
+class ArticleTest(unittest.TestCase):
 
     def setUp(self):
         text = """
@@ -15,17 +15,17 @@ class PageTest(unittest.TestCase):
         [[link2]]
         [[link to: be excluded]]
         """
-        self.page = Page(text)
+        self.article = Article(text)
 
     def test_title(self):
-        self.assertEqual(self.page.title, 'abc')
+        self.assertEqual(self.article.title, 'abc')
 
     def test_links(self):
-        self.assertEqual(self.page.links, ['link1', 'link2', 'link2'])
+        self.assertEqual(self.article.links, ['link1', 'link2', 'link2'])
 
     def test_unique_from_list(self):
-        lst = [self.page, self.page]
-        actual = Page.unique_from_list(lst)
+        lst = [self.article, self.article]
+        actual = Article.unique_from_list(lst)
         self.assertEqual(actual, ['abc','link1', 'link2'])
 
 

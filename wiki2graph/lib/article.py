@@ -1,8 +1,7 @@
 import re
 from utilities import flatten_all
-import pdb
 
-class Page():
+class Article():
     def __init__(self, text):
         self.text = text
         self.title = self.find_title()
@@ -28,12 +27,16 @@ class Page():
         return link.split('|')[0].strip()
 
     @staticmethod
+    def unique_from_list(article_list):
+        lst = map(lambda p: Article.merge_links_and_title(p), article_list)
+        return Article.flatten_unique(lst)
+
+    @staticmethod
+    def flatten_unique(lst):
+        return list(set(list(flatten_all(lst))))
+
+    @staticmethod
     def merge_links_and_title(p):
         l = p.links
         l.append(p.title)
         return l
-
-    @staticmethod
-    def unique_from_list(page_list):
-        lst = map(lambda p: Page.merge_links_and_title(p), page_list)
-        return list(set(flatten_all(lst)))

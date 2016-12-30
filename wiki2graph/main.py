@@ -8,7 +8,7 @@ file_path = 'data/chunk-1.xml.bz2'
 
 if __name__ == '__main__':
     pages = Parser().process_file_to_pages(file_path)
-    page_list = map(lambda x: Page(x), pages)
-    page_unique = Page.unique_from_list(page_list)
+    article_list = map(lambda x: Article(x), pages)
+    article_unique = Article.unique_from_list(article_list)
 
-    pdb.set_trace()
+    unique_articles_csv = CsvExporter().unique_articles(article_unique)
